@@ -1,6 +1,19 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2 col-md-offset-5">
+            <div *ngIf="status == 1" class="alert alert-success">
+                <strong>Success!</strong> you have added a ranger!.
+            </div>
+
+            <div *ngIf="status == -1" class="alert alert-danger">
+                <strong>Ops!</strong> Houston we have a problem.
+            </div>
+        </div>
+    </div>
+</div>
+
 <form [formGroup]='personForm' (ngSubmit)="onSubmit()">
     <div class="container">
-
         <div class="form-group">
             <label for="firstname">First Name</label>
             <input id="firstname" type="text" class="form-control" formControlName="firstName">

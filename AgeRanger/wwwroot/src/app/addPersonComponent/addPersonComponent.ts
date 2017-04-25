@@ -14,7 +14,7 @@ export class AddPersonComponent implements OnInit {
 
   private person: Person = new Person();
   private personForm: FormGroup;
-  status: boolean;
+  status: number = 0;
 
   formErrors = {
     'firstName': '',
@@ -80,13 +80,13 @@ export class AddPersonComponent implements OnInit {
   }
 
   onSubmit() {
-
     return this.personService.addPerson(this.person).subscribe(result => {
-      if (result.status === 201)
-        this.status = true;
+      if (result.status === 201) {
+        this.status = 1;
+        this.personForm.reset()
+      }
       else
-        this.status = false;
+        this.status = -1;
     });
   }
 }
-
