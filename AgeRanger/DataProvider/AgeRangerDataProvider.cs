@@ -21,6 +21,8 @@ namespace AgeRanger.DataProvider
         {
             var addPeronResult = DataOperationStatus.Init;
 
+            if (person == null)
+                return DataOperationStatus.ValidationError;
             try
             {
                 _ctx.Person.Add(person);
