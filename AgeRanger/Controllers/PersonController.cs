@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace AgeRanger.Controllers
 {
-    [EnableCors("MyPolicy")]
+    [EnableCors(AppConstants.CorsPolicyName)]
     public class PersonController : Controller
     {
         private AgeRangerContext _ctx;
