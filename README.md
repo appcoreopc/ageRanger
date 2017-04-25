@@ -10,7 +10,7 @@ Requires nodejs and node package manager.
 Download code and open using Visual Studio 2017 community edition. Might get an "assemblies incompatibility issue", re-build 
 and it should be good to go.
 
-Step 1. Please ensure REST component is up and running
+Step 1. Please ensure REST component is up and running by hitting F5 on Visual Studio.
 
 Setup CORS to limit accessibility to localhost:3000. 
 
