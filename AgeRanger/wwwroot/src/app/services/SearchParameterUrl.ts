@@ -1,13 +1,12 @@
 export class URLSearchParams {
-
-    parseUrl: string;
+    searchUrl: string;
     isQuestionMarkParsed: boolean = false;
     paramIdx: number = 0;
 
-    getSearchParameter(firstname: string, lastname: string) {
+    getSearchParameter(firstname: string, lastname: string): string {
         this.setFirstName(firstname);
         this.setLastName(lastname);
-        return this.ParseUrl;
+        return this.searchUrl;
     }
 
     private setFirstName(firstname: string) {
@@ -26,14 +25,18 @@ export class URLSearchParams {
     private setQuestionMark() {
 
         if (!this.isQuestionMarkParsed) {
-            this.parseUrl = "?";
+            this.searchUrl = "?";
             this.isQuestionMarkParsed = true;
+            this.paramIdx++;
         }
     }
 
     private ParseUrl(param: string) {
-        if (this.paramIdx > 0) {
-            this.parseUrl = param;
+        if (this.paramIdx == 1) {
+            this.searchUrl = this.searchUrl + param;
+        }
+        else if (this.paramIdx > 1) {
+            this.searchUrl = this.searchUrl + "&" + param;
         }
         this.paramIdx++;
     }

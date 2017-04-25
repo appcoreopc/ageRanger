@@ -35,13 +35,8 @@ export class PersonService {
     };
 
     search(firstname: string, lastname: string) {
-
-        var searchUrlParser = new URLSearchParams();
-        var searchUrl =
-            searchUrlParser.getSearchParameter(firstname, lastname);
-
-        return this.http.get(this._urlPersonSearch + searchUrl).map(x => x.json()).subscribe(searchData => {
-            this._searchResult = searchData;
-        });
+        let searchUrlParser = new URLSearchParams();
+        let searchUrl: string = searchUrlParser.getSearchParameter(firstname, lastname);
+        return this.http.get(this._urlPersonSearch + searchUrl).map(x => x.json());
     }
 }
