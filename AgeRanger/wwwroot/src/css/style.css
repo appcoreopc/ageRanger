@@ -1,5 +1,3 @@
-
-
 .sk-fading-circle {
     margin: 40px auto;
     width: 40px;
@@ -219,4 +217,4 @@
   .rTableCell,
   .rTableHead {
     display: table-cell;
-  }
+    padding : 8px;
