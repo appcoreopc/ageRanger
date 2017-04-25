@@ -9,7 +9,7 @@ import { Person } from '../Person'
 
 export class ListComponent implements OnInit {
   data: Person[] = [];
-  
+
   constructor(private service: PersonService) {
   }
 
@@ -17,9 +17,9 @@ export class ListComponent implements OnInit {
     try {
 
       if (this.service && this.service.listPerson())
-        this.service.listPerson().subscribe(x => {
-          if (x)
-            this.data = x;
+        this.service.listPerson().subscribe(dataJson => {
+          if (dataJson)
+            this.data = dataJson;
         });
     }
     catch (e) {

@@ -31,10 +31,7 @@ export class PersonService {
     };
 
     listPerson(): Observable<any> {
-        return this.http.get(this._urlPersonList).map(data => {
-            console.log(data);
-            data.json();
-        });
+        return this.http.get(this._urlPersonList).map(data => data.json());
     };
 
     search(firstname: string, lastname: string) {
