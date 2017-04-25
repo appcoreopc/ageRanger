@@ -31,6 +31,13 @@ namespace AgeRanger
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             // Add framework services.
             services.AddMvc();
 
@@ -53,6 +60,7 @@ namespace AgeRanger
             _env = env;
 
             loggerFactory.AddConsole(Configuration.GetSection(AppConstants.AppConfigurationLoggingSection));
+
             loggerFactory.AddDebug();
 
             app.UseMvc();

@@ -3,9 +3,11 @@ using AgeRanger.DataProvider;
 using AgeRanger.Model;
 using Microsoft.Extensions.Options;
 using AgeRanger.Config;
+using Microsoft.AspNetCore.Cors;
 
 namespace AgeRanger.Controllers
 {
+    [EnableCors("MyPolicy")]
     public class PersonController : Controller
     {
         private AgeRangerContext _ctx;
@@ -22,7 +24,7 @@ namespace AgeRanger.Controllers
         }
         
         [HttpPost]
-        public IActionResult Add([FromForm] Person person)
+        public IActionResult Add([FromBody] Person person)
         {
             var result = _provider.AddPerson(person);
             return StatusCode(_statusProvider.GetStatus(result));

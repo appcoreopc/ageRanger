@@ -11,8 +11,11 @@ import { Http } from '@angular/http';
 
 export class SearchComponent {
 
-  firstname = new FormControl();
-  lastname = new FormControl();
+  private firstname = new FormControl();
+  private lastname = new FormControl();
+
+  private firstnameTerm: string = '';
+  private lastnameTerm: string = '';
 
   constructor(private personService: PersonService) {
   }
@@ -23,14 +26,18 @@ export class SearchComponent {
       .debounceTime(400)
       .distinctUntilChanged()
       .subscribe(term => {
-        console.log(this.firstname.value);
+        this.firstname = term;
+        this.personService.search(this.firstnameTerm, this.lastnameTerm);
+
       });
 
     this.lastname.valueChanges
       .debounceTime(400)
       .distinctUntilChanged()
       .subscribe(term => {
-        console.log(this.lastname.value);
+        this.lastname = term;
+        this.personService.search(this.firstnameTerm, this.lastnameTerm);
+
       });
   }
 }

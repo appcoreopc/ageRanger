@@ -13,8 +13,6 @@ import { Person } from '../Person';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/delay';
-import 'jasmine';
-
 
 describe('AddPersonComponent', () => {
   let comp: AddPersonComponent;
@@ -40,8 +38,8 @@ describe('AddPersonComponent', () => {
     fixture = TestBed.createComponent(AddPersonComponent);
     personService = fixture.debugElement.injector.get(PersonService);
     personService = TestBed.get(PersonService);
-    spy = spyOn(personService, 'addPerson').and.returnValue(Promise.resolve(true));
-    spy = spyOn(personService, 'addPerson2').and.returnValue(Observable.of(true));
+
+    spy = spyOn(personService, 'addPerson').and.returnValue(Observable.of(true));
 
 
   });
@@ -55,12 +53,13 @@ describe('AddPersonComponent', () => {
   it('rendered controls - firstname, lastname and age', () => {
 
     fixture.detectChanges();
+
     expect(fixture.debugElement.query(By.css("#firstname")).attributes["id"]).toContain('firstname');
     expect(fixture.debugElement.query(By.css("#lastname")).attributes["id"]).toContain('lastname');
     expect(fixture.debugElement.query(By.css("#age")).attributes["id"]).toContain('age');
   });
 
-  it('add person successful', async(() => {
+  it('add person successful ', async(() => {
 
     let targetComponent = fixture.componentInstance;
     let fakePerson = new Person({
@@ -71,29 +70,12 @@ describe('AddPersonComponent', () => {
 
     fixture.detectChanges();
     let submitResult = targetComponent.onSubmit(fakePerson);
-    submitResult.then(a => {
-      fixture.whenStable().then(() => {
-        expect(a).toBe(true);
-      })
-    });
-  }));
-
-  it('person2', async(() => {
-
-    let targetComponent = fixture.componentInstance;
-    let fakePerson = new Person({
-      firstName: '',
-      lastName: '',
-      age: 12
-    });
-
-    fixture.detectChanges();
-    let submitResult = targetComponent.onSubmit2(fakePerson);
-    submitResult.subscribe( r => {
+    submitResult.subscribe(r => {
       fixture.whenStable().then(() => {
         console.log(r);
         expect(r).toBe(true);
       })
     });
   }));
+
 });

@@ -38,7 +38,7 @@ export class AddPersonComponent implements OnInit {
       'age': [this.person.age, [Validators.required]],
     });
 
-    this.personForm.valueChanges
+    this.personForm.valueChanges.debounceTime(500)
       .subscribe(data => this.onValueChanged(data));
   }
 
@@ -57,9 +57,13 @@ export class AddPersonComponent implements OnInit {
     }
   };
 
-  onValueChanged(data?: any) {
+  onValueChanged(data?: Person) {
     if (!this.personForm) { return; }
+
     const form = this.personForm;
+    this.person.firstName = data.firstName;
+    this.person.lastName = data.lastName;
+    this.person.age = data.age;
 
     for (const field in this.formErrors) {
       // clear previous error message (if any)
@@ -75,22 +79,14 @@ export class AddPersonComponent implements OnInit {
     }
   }
 
-  addPerson(): void {
-    let p = new Person({
-      firstName: '',
-      lastName: "",
-      age: 12
+  onSubmit() {
+
+    return this.personService.addPerson(this.person).subscribe(result => {
+      if (result.status === 201)
+        this.status = true;
+      else
+        this.status = false;
     });
-
-    this.personService.addPerson(p);
-  }
-
-  onSubmit(person: Person) {
-     return this.personService.addPerson(person).then(statusResult => this.status = statusResult);
-  }
-
-  onSubmit2(person: Person) {
-     return this.personService.addPerson2(person);
   }
 }
 

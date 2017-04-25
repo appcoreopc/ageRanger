@@ -21,8 +21,9 @@ namespace AgeRanger.DataProvider
         {
             var addPeronResult = DataOperationStatus.Init;
 
-            if (person == null)
-                return DataOperationStatus.ValidationError;
+            if (person == null || string.IsNullOrEmpty(person?.FirstName) ||
+                string.IsNullOrEmpty(person?.LastName))
+                    return DataOperationStatus.ValidationError;
 
             try
             {
