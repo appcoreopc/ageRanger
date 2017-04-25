@@ -1,7 +1,13 @@
 export class URLSearchParams {
-    searchUrl: string;
-    isQuestionMarkParsed: boolean = false;
-    paramIdx: number = 0;
+    
+    private searchUrl: string;
+    private isQuestionMarkParsed: boolean = false;
+    private paramIdx: number = 0;
+
+     private readonly firstNameSearchKey = "firstname=";
+     private readonly lastNameSearchKey = "lastname=";
+     private readonly queryMarker = "?";
+     private readonly nextQueryMarker = "&";
 
     getSearchParameter(firstname: string, lastname: string): string {
         this.setFirstName(firstname);
@@ -12,20 +18,20 @@ export class URLSearchParams {
     private setFirstName(firstname: string) {
         this.setQuestionMark();
         if (firstname) {
-            this.ParseUrl("firstname=" + firstname);
+            this.ParseUrl(this.firstNameSearchKey + firstname);
         }
     }
 
     private setLastName(lastname: string) {
         this.setQuestionMark();
         if (lastname)
-            this.ParseUrl("lastname=" + lastname);
+            this.ParseUrl(this.lastNameSearchKey + lastname);
     }
 
     private setQuestionMark() {
 
         if (!this.isQuestionMarkParsed) {
-            this.searchUrl = "?";
+            this.searchUrl = this.queryMarker;
             this.isQuestionMarkParsed = true;
             this.paramIdx++;
         }
@@ -36,7 +42,7 @@ export class URLSearchParams {
             this.searchUrl = this.searchUrl + param;
         }
         else if (this.paramIdx > 1) {
-            this.searchUrl = this.searchUrl + "&" + param;
+            this.searchUrl = this.searchUrl + this.nextQueryMarker + param;
         }
         this.paramIdx++;
     }

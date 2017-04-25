@@ -21,10 +21,6 @@ namespace AgeRanger.DataProvider
         {
             var addPeronResult = DataOperationStatus.Init;
 
-            if (person == null || string.IsNullOrEmpty(person?.FirstName) ||
-                string.IsNullOrEmpty(person?.LastName))
-                    return DataOperationStatus.ValidationError;
-
             try
             {
                 _ctx.Person.Add(person);
@@ -70,7 +66,8 @@ namespace AgeRanger.DataProvider
         }
 
         private static Expression<Func<Person, bool>> SearchBy(string firstname, string lastname)
-        {
+        {   
+
             Expression<Func<Person, bool>> myExpression = null;
 
             if (!string.IsNullOrEmpty(firstname) && !string.IsNullOrEmpty(lastname))
