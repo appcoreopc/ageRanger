@@ -1,0 +1,32 @@
+<h2>Search Person List</h2>
+<div class="container">
+
+    <div class="form-group">
+        <div class="col-sm-6">
+            First Name <input type='text' class="form-control" value='firstname' name='firstname' id='firstname' [formControl]='firstname'
+            /> 
+        </div>
+        <div class="col-sm-6">
+            Last Name <input type='text' value='lastname' namme='firstname' id='lastname' [formControl]='lastname' class="form-control"
+            />
+        </div>
+    </div>
+</div>
+
+<div class="container col-sm-12">
+    <div class="rTable col-sm-12">
+        <div class="rTableRow col-sm-12">
+            <div class="rTableHead col-sm-3"><strong>First Name </strong></div>
+            <div class="rTableHead col-sm-3"><strong>Last Name </strong></div>
+            <div class="rTableHead col-sm-3"><strong>Age </strong></div>
+            <div class="rTableHead col-sm-3"><strong>Age Group </strong></div>
+        </div>
+
+        <div *ngFor="let item of data" class="list-inline">
+            <div class="rTableCell col-sm-3">{{item?.firstName}}}</div>
+            <div class="rTableCell col-sm-3">{{item?.firstName}}}</div>
+            <div class="rTableCell col-sm-3">{{item?.firstName}}}</div>
+            <div class="rTableCell col-sm-3">{{item?.firstName}}}</div>
+        </div>
+    </div>
+</div>

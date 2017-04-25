@@ -1,0 +1,10 @@
+node_modules/*
+*.js
+!karma.conf.js
+!karma-test-shim.js 
+src/*.js
+*.map
+!base/*
+bin/
+obj/
+.vs/
