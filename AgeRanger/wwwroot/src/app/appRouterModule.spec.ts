@@ -48,7 +48,7 @@ describe('Routing component', () => {
         expect(location.path()).toEqual('/', 'default route');
     }));
 
-    it('navigate to add', fakeAsync(() => {
+    it('navigate to add and component loaded correctly', fakeAsync(() => {
         createComponent();
         click(page.addPersonLinkDe);
         advance();
@@ -56,20 +56,20 @@ describe('Routing component', () => {
         expectElementOf(AddPersonComponent);
     }));
 
-    it('navigate to list', fakeAsync(() => {
+    it('navigate to list and component loaded correctly', fakeAsync(() => {
         createComponent();
         click(page.listPersonLinkDe);
         advance();
         expectPathToBe('/list');
-
+        expectElementOf(ListComponent);
     }));
 
-    it('navigate to search', fakeAsync(() => {
+    it('navigate to search and component loaded correctly', fakeAsync(() => {
         createComponent();
         click(page.searchLinkDe);
         advance();
         expectPathToBe('/search');
-
+        expectElementOf(SearchComponent);
     }));
 
 });
@@ -117,7 +117,7 @@ function expectPathToBe(path: string, expectationFailOutput?: any) {
 
 function expectElementOf(type: Type<any>): any {
     const el = fixture.debugElement.query(By.directive(type));
-    console.log(el);
+    expect(el.componentInstance).toBeTruthy(el.componentInstance instanceof type);
     return el;
 }
 
@@ -146,7 +146,6 @@ function createComponent() {
         .and.returnValue(Observable.of(fakePersonData())); // fakes it
 
     advance();
-
     page = new Page();
 }
 
