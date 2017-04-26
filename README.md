@@ -23,9 +23,9 @@ npm start -> to run UI
 npm test -> to run front end unit testing.
 
 
-## Playground for my Angular stuff 
+27 March 2017.
 
-### Tested with Angular4 - in Angular4 branch - working pretty well and I don't have to change anything mainly cuz Angular4 is around code optimization. 
+Tested with Angular4 - in Angular4 branch - working pretty well and I don't have to change anything mainly cuz Angular4 is around code optimization. 
 
 
 
