@@ -19,6 +19,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/toPromise';
 import { PersonService } from './PersonService';
+import { Location }           from '@angular/common';
 
 const fakePersonData = () => [
     { id: 1, firstName: 'Jermaine', lastName: 'Nelson', age: 4, ageGroup: 'Child' },
