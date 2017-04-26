@@ -108,7 +108,6 @@ describe('PersonService List', () => {
         }));
         backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
         service.listPerson().do(plist => {
-
             fail('should be no person');
         }).catch(err => {
             return Observable.of(null);
@@ -141,22 +140,18 @@ describe('PersonService Search', () => {
     }));
 
     beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
-
         backend = be;
         service = new PersonService(http);
         personData = fakePersonData();
         let options = new ResponseOptions({ status: 200, body: { data: personData } });
         response = new Response(options);
-
     }));
 
     it('firstname, lastname null search', async(inject([], () => {
         backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
         service.search(null, null)
             .do(plist => {
-                console.log(plist);
-                expect(plist.data.length).toBe(personData.length,
-                    'should have expected no. of Person');
+                expect(plist.data.length).toBe(personData.length, 'should have expected no. of Person');
             })
             .toPromise();
     })));

@@ -9,17 +9,26 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
+import { Person } from '../Person';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 
-describe('AddPersonComponent (templateUrl)', () => {
+describe('Search Person Component', () => {
   let comp: SearchComponent;
   let fixture: ComponentFixture<SearchComponent>;
   let de: DebugElement;
   let el: HTMLElement;
   let personService: PersonService;
   let spy: jasmine.Spy;
+  let personData: Person[];
+
+  const fakePersonData = () => [
+    { id: 1, firstName: 'Jermaine', lastName: 'Nelson', age: 4, ageGroup: 'Child' },
+    { id: 2, firstName: 'Phil', lastName: 'McCurdy', age: 20, ageGroup: 'Teenager' },
+    { id: 3, firstName: 'Shannon', lastName: 'Alexander', age: 11, ageGroup: 'Child' },
+    { id: 4, firstName: 'Duncan', lastName: 'Tim', age: 50, ageGroup: 'Kinda old' }
+  ] as Person[];
 
   // async beforeEach
   beforeEach(async(() => {
@@ -36,8 +45,7 @@ describe('AddPersonComponent (templateUrl)', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SearchComponent);
     personService = TestBed.get(PersonService);
-    spy = spyOn(personService, 'addPerson').and.returnValue(Observable.of(true));
-    //spy = spyOn(personService, 'addPerson').and.returnValue(Observable.of(true));
+    spy = spyOn(personService, 'search').and.returnValue(fakePersonData());
   });
 
   it('component loaded', () => {
@@ -52,18 +60,4 @@ describe('AddPersonComponent (templateUrl)', () => {
     expect(fixture.debugElement.query(By.css("#firstname")).attributes["id"]).toContain('firstname');
     expect(fixture.debugElement.query(By.css("#lastname")).attributes["id"]).toContain('lastname');
   });
-
-  it('person search data loaded', async(() => {
-
-    personService.addPerson = jasmine.createSpy('').and.returnValue(true)
-    let targetComponent = fixture.componentInstance;
-    fixture.detectChanges();
-
-    fixture.whenStable().then(() => {
-
-      //expect(targetComponent.data.length).toBe(2);
-      //expect(targetComponent.data[0].firstName).toBe('jeremy');
-      //expect(targetComponent.data[0].lastName).toBe('woo');
-    })
-  }));
 });
