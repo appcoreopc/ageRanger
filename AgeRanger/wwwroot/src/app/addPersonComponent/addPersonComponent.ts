@@ -31,11 +31,12 @@ export class AddPersonComponent implements OnInit {
   }
 
   private initForm() {
-
     this.personForm = this.fb.group({
-      'firstName': [this.person.firstName, [Validators.required]],
-      'lastName': [this.person.lastName, [Validators.required]],
-      'age': [this.person.age, [Validators.required]],
+      'firstName': [this.person.firstName, [Validators.required, Validators.minLength(1),
+      Validators.maxLength(24)]],
+      'lastName': [this.person.lastName, [Validators.required, Validators.minLength(1),
+      Validators.maxLength(24)]],
+      'age': [this.person.age, [Validators.required, Validators.maxLength(4)]],
     });
 
     this.personForm.valueChanges.debounceTime(500)
@@ -45,15 +46,17 @@ export class AddPersonComponent implements OnInit {
   validationMessages = {
     'firstName': {
       'required': 'First Name is required.',
-      'minlength': 'Name must be at least 4 characters long.',
-      'maxlength': 'Name cannot be more than 24 characters long.',
-      'forbiddenName': 'Someone named "Bob" cannot be a hero.'
+      'minlength': 'First Name must be at least 4 characters long.',
+      'maxlength': 'First Name cannot be more than 24 characters long.'
     },
     'lastName': {
       'required': 'Last Name is required.',
+      'minlength': 'Last Name must be at least 4 characters long.',
+      'maxlength': 'Last Name cannot be more than 24 characters long.'
     },
     'age': {
-      'required': 'Age is required.'
+      'required': 'Age is required and must be numeric.',
+      'maxlength': 'You cannot be alive!.'
     }
   };
 

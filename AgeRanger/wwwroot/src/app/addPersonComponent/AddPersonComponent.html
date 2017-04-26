@@ -36,7 +36,7 @@
 
         <div class="form-group">
             <label for="name">Age</label>
-            <input id="age" type="text" class="form-control" formControlName="age">
+            <input id="age" type="number" class="form-control" formControlName="age">
 
             <div *ngIf="formErrors.age" class="alert alert-danger">
                 {{ formErrors.age }}
