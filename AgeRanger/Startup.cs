@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using AgeRanger.DataProvider;
 using AgeRanger.Controllers;
 using AgeRanger.Config;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AgeRanger
 {
@@ -36,6 +37,14 @@ namespace AgeRanger
                 builder.WithOrigins(AppConstants.CorsOriginHost).AllowAnyMethod().AllowAnyHeader();
 
             }));
+    
+            if (!_env.IsDevelopment())
+            {
+                services.AddMvc(options =>
+                {
+                    options.Filters.Add(typeof(RequireHttpsAttribute));
+                });
+            }
 
             // Add framework services.
             services.AddMvc();
@@ -57,6 +66,13 @@ namespace AgeRanger
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             _env = env;
+
+            app.UseStaticFiles();
+
+            app.UseRedirectValidation(opts =>
+            {
+                opts.AllowSameHostRedirectsToHttps();
+            });
 
             loggerFactory.AddConsole(Configuration.GetSection(AppConstants.AppConfigurationLoggingSection));
 
