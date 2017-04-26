@@ -83,7 +83,7 @@ export class AddPersonComponent implements OnInit {
     return this.personService.addPerson(this.person).subscribe(result => {
       if (result.status === 201) {
         this.status = 1;
-        this.personForm.reset() ;
+        this.personForm.reset();
       }
       else
         this.status = -1;

@@ -59,23 +59,12 @@ describe('AddPersonComponent', () => {
     expect(fixture.debugElement.query(By.css("#age")).attributes["id"]).toContain('age');
   });
 
-  it('add person successful ', async(() => {
+  it('add person failed ', async(() => {
 
     let targetComponent = fixture.componentInstance;
-    let fakePerson = new Person({
-      firstName: '',
-      lastName: '',
-      age: 12
-    });
-
     fixture.detectChanges();
-    let submitResult = targetComponent.onSubmit(fakePerson);
-    submitResult.subscribe(r => {
-      fixture.whenStable().then(() => {
-        console.log(r);
-        expect(r).toBe(true);
-      })
-    });
+    let submitResult = targetComponent.onSubmit();
+    expect(targetComponent.status).toBe(-1);
   }));
 
 });
